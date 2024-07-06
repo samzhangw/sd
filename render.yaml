@@ -1,5 +1,12 @@
+# render.yaml
+
 services:
   - name: web
-    env: python3
-    build_command: pip install -r requirements.txt
-    start_command: python app.py
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    healthCheckPath: /
+    envVars:
+      FLASK_ENV: production
+      SECRET_KEY: your_secret_key_here
+      DATABASE_URL: sqlite:///data.db
