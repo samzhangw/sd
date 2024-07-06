@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成績查看時間已過期</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        .time-info {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        a {
+            display: block;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>成績查看時間已過期</h1>
+    <p>抱歉，您的成績查看時間已過期。</p>
+    {% if admin and admin.grade_access_start_time and admin.grade_access_end_time %}
+    <div class="time-info">
+        <p><strong>管理員已設定的開放時間：</strong></p>
+        <p>開始時間：{{ admin.grade_access_start_time }}</p>
+        <p>截止時間：{{ admin.grade_access_end_time }}</p>
+    </div>
+    {% endif %}
+    <a href="/logout">登出</a>
+</body>
+</html>

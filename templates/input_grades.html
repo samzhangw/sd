@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>输入成绩</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-group input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>输入成绩</h1>
+    <form action="/input_grades" method="POST">
+        <table>
+            <tr>
+                <th>学生</th>
+                {% for subject in subjects %}
+                    <th>{{ subject }}</th>
+                {% endfor %}
+            </tr>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student.username }}</td>
+                    {% for subject in subjects %}
+                        <td><input type="number" name="{{ student.id }}_{{ subject }}" value=""></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="form-group">
+            <button type="submit">提交成绩</button>
+        </div>
+    </form>
+
+    <div class="form-group">
+        <form action="/add_subject" method="POST">
+            <input type="text" name="new_subject" placeholder="新增科目" required>
+            <button type="submit">新增科目</button>
+        </form>
+    </div>
+
+    <p><a href="/dashboard_admin">返回</a></p>
+</body>
+</html>
