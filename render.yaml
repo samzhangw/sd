@@ -5,10 +5,3 @@ services:
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: python app.py
-    healthCheckPath: /
-    envVars:
-      FLASK_ENV: production
-      SECRET_KEY: your_secret_key_here
-      DATABASE_URL: sqlite:///data.db
-python -m venv /opt/render/project/src/.venv
-source /opt/render/project/src/.venv/bin/activate
