@@ -28,6 +28,8 @@
             background-color: #fff;
             border-radius: 5px;
             text-align: left;
+            display: inline-block;
+            text-align: center;
         }
 
         a {
@@ -56,6 +58,27 @@
         <p>截止時間：{{ admin.grade_access_end_time }}</p>
     </div>
     {% endif %}
+    <div class="time-info" id="current-time">
+        <p><strong>目前系統時間：</strong></p>
+        <p id="system-time"></p>
+    </div>
     <a href="/logout">登出</a>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const currentTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            document.getElementById('system-time').textContent = currentTime;
+        }
+
+        setInterval(updateTime, 1000);
+        window.onload = updateTime;
+    </script>
 </body>
 </html>
