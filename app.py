@@ -321,7 +321,15 @@ def add_subject():
     
     return redirect('/dashboard_admin')
 
-
+# New route to display grade access times for all students
+@app.route('/grade_access_times')
+def grade_access_times():
+    if 'username' in session and session.get('role') == 'admin':
+        admin = Admin.query.filter_by(username=session['username']).first()
+        if admin:
+            students = Student.query.all()
+            return render_template('grade_access_times.html', students=students)
+    return redirect('/dashboard_admin')
 # 請假歷史紀錄頁面
 @app.route('/leave_history')
 def leave_history():
